@@ -1,0 +1,214 @@
+<!-- Step 1: Create the Layout. -->
+<!-- Step 2: Flag key sections with specific id names. These will be replaced by JavaScript -->
+<!-- Step 2: Link to JavaScript (at end of the file) -->
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Boot Camp - Word Guess</title>
+
+    <!-- Bootstrap is used to make game look nicer -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <!-- Bootstrap Container will hold everything -->
+    <div class="container">
+        <!-- Jumbotron holds the title section -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>80's Bands - Word Guess</h1>
+                <h2>Guess the name of bands from 80's!</h2>
+                <small>Click any letter to begin...</small>
+            </div>
+        </div>
+
+        <!-- Game counters all held here. cards are being used to hold various sections. -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- First card: Holds the Word to Guess (blanks and guessed word) -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><strong>Word to Guess</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- This h3 section called wordblanks is what we'll be replacing with letters as the user guesses.
+						Pay particular attention to the id called ***wordblanks***. We'll be referencing this in the JavaScript. -->
+                        <h3 id="guesses-made">_ _ _ _ _ _ _ _ _ </h3>
+                    </div>
+                </div>
+
+                <!-- Second card: Holds the list of Wrong User Guesses. -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- This span section called userGuesses is where we will be dumping the wrong guesses.
+						Pay particular attention to the id called ****userGuesses***. We'll be referencing this in the JavaScript. -->
+                        <strong>Wrong Guesses: </strong> <span id="wrong-guesses"></span>
+                    </div>
+                </div>
+
+                <!-- Third card: Holds the Number of Wrong Guesses -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- This span called guessesLeft is where we will be dumping the number of guesses left.
+                          Pay attention to the id called ****guessesLeft****. We'll be referencing this in the JavaScript. -->
+                        <strong>Guesses Left: </strong> <span id="guesses-left">9</span>
+                    </div>
+                </div>
+
+                <!-- Fourth card: Holds the number of Wins. -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- This span called winCounter is where we'll be dumping the number of wins.
+                          Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
+                        <strong>Wins: </strong> <span id="wins">0</span>
+                    </div>
+                </div>
+
+                <!-- Fifth card: Holds the number of Losses. -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- This span called winCounter is where we'll be dumping the number of wins.
+                          Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
+                        <strong>Losses: </strong> <span id="losses">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        /////Variable Area
+        var bands = ['replacements', 'soul asylum', 'husker du', 'prince', 'pixies', 'cure',
+            'new order', 'sonic youth', 'minuteman'];
+
+        var bandToChoose = ""; //null;
+
+        var guessedLetters = []; //var lettersInBandToChose = [];     
+
+        var numBlanks = 0;// non-existent
+
+        var blanksAndSuccesses = [];//non-existent
+
+        var wrongGuesses = [];//Non-existent
+
+        //Game counters?
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 10;
+
+        //FUNCTIONS////
+        // startGame()
+        // Its how we we will start and restart the game.
+        // (Note: It's not being run here. It's just being made for future use.)
+        function startGame() {
+            // Reset the guesses back to 0.
+            guessesLeft = 10;
+            // Solution is chosen randomly from wordList.
+            bandToChoose = bands[Math.floor(Math.random * bands.length)];
+            // The word is broken into individual letters.
+            guessedLetters = bandToChoose.split("");
+            // We count the number of letters in the word.
+            numBlanks = guessedLetters.length;
+            // We print the solution in console (for testing).
+            console.log(bandToChoose);
+
+            /// functions 
+            var updateBandChoice = function () {
+
+                return bandToChoose;
+            };
+
+            // 
+            //     bandLetter = bandToChoose[null];
+            // };
+            var updateGuessesLeft = function () {
+                document.querySelector('#guesses-left').innerHTML = guessesLeft;
+            };
+
+            var updateGuessesSoFar = function () {
+                document.querySelector('#guesses-made').innerHTML = guessedLetters.join(", ");
+            };
+
+            var reset = function () {
+                guessesLeft = 10;
+                guessedLetters = [];
+                updateBandChoice();
+                updateGuessesLeft();
+                updateGuessesSoFar();
+                updateBandLetter();
+            };
+
+            updateBandChoice();
+            //updateBandLetter();
+            updateGuessesLeft();
+
+            var bandPick = `${bandToChoose}`;
+            for (var bandLetter = 0; bandLetter < bandPick.length; bandLetter++) {
+                console.log(bandPick[bandLetter]);
+            };
+
+
+
+            //Full Function///MAIN FUNCTION/////////////////////
+            // This function will capture the keyboard clicks.
+            document.onkeydown = function (event) {
+
+
+                // It's going to reduce the guesses by one
+                guessesLeft--;
+
+                // Lowercase the letter
+                var letter = event.key.toLowerCase();
+
+                // Then add the guess to the guessedLetters array
+                guessedLetters.push(letter);
+
+                // Then its going to run the update functions
+                updateGuessesLeft();
+                updateGuessesSoFar();
+
+                //////////////////////////////////////////////////////////
+                // We'll check if there's a match.
+                if (letter === bandLetter) {
+
+                    // If there is then we win and we'll update the HTML to display the win.
+                    wins++;
+                    document.querySelector("#wins").innerHTML = wins;
+
+                    // Then we'll reset the game
+                    reset();
+                }
+
+                // If we are out of guesses...
+                if (guessesLeft === 0) {
+
+                    // Then we will loss and we'll update the HTML to display the loss.
+                    losses++;
+                    document.querySelector("#losses").innerHTML = losses;
+
+                    // Then we'll call the reset.
+                    reset();
+                }
+            };
+
+        // <h3 id="word-blanks">_ _ _ _ _ _ _ _ _ </h3>
+        // <strong>Wrong Guesses: </strong> <span id="wrong-guesses"></span>
+        // <strong>Guesses Left: </strong> <span id="guesses-left">9</span>
+        // <strong>Wins: </strong> <span id="win-counter">0</span>
+        // <strong>Losses: </strong> <span id="loss-counter">0</span>
+    </script>
+
+</body>
+
+
+</html>
