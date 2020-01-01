@@ -29,3 +29,13 @@ var updateGuessesLeft = function () {
        document.querySelector('#guesses-made').innerHTML = guessedLetters.join(", ");
    };
 
+   var reset = function () {
+    guessesLeft = 10;
+    guessedLetters = [];
+    updateBandGuess();
+    updateGuessesLeft();
+    updateGuessesSoFar();
+};
+
+updateBandGuess();
+updateGuessesLeft();
