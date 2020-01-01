@@ -34,56 +34,6 @@ for (var i = 0; i < bandLetter.length; i++) {
 
 var updateGuessesLeft = function () {
     document.querySelector('#guesses-left').innerHTML = guessesLeft;
-   };
-
-   var updateGuessesSoFar = function () {
-       document.querySelector('#guesses-made').innerHTML = guessedLetters.join(", ");
-   };
-
-   var reset = function () {
-    guessesLeft = 10;
-    guessedLetters = [];
-    updateBandChoice();
-    updateGuessesLeft();
-    updateGuessesSoFar();
-    updateBandLetter();
-};
-
-updateBandChoice();
-updateBankChoice();
-updateGuessesLeft();
-
-
-//Full Function///MAIN FUNCTION/////////////////////
-// This function will capture the keyboard clicks.
-document.onkeydown = function (event) {
-   
-   
-    // It's going to reduce the guesses by one
-    guessesLeft--;
-
-    // Lowercase the letter
-    var letter = event.key.toLowerCase();
-
-    // Then add the guess to the guessedLetters array
-    guessedLetters.push(letter);
-
-    // Then its going to run the update functions
-    updateGuessesLeft();
-    updateGuessesSoFar();
-
-    //////////////////////////////////////////////////////////
-/// functions 
-/*var updateBandChoice = function () {
-
-    return bandToChoose;
-};
-
-// 
-//     bandLetter = bandToChoose[null];
-// };
-var updateGuessesLeft = function () {
-    document.querySelector('#guesses-left').innerHTML = guessesLeft;
 };
 
 var updateGuessesSoFar = function () {
@@ -157,10 +107,3 @@ document.onkeydown = function (event) {
 // <strong>Guesses Left: </strong> <span id="guesses-left">9</span>
 // <strong>Wins: </strong> <span id="win-counter">0</span>
 // <strong>Losses: </strong> <span id="loss-counter">0</span>  */
-</script>
-
-</body>
-
-
-</html>
-};
