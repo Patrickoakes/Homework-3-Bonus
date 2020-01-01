@@ -3,9 +3,11 @@
 var bands = ['replacements', 'soul asylum', 'husker du', 'prince', 'pixies','cure',
 'new order', 'sonic youth', 'minuteman'];
 
-var guessedLetters =[];
+var bandToChoose = null;
 
-var letterToGuess = null;
+var bandLetter = [];
+
+var guessedLetters =[];
 
 var guessesLeft = 10;
 
@@ -14,9 +16,17 @@ var wins = 0;
 var losses = 0;
 
 /// functions 
-var updateBandGuess = function () {
-letterToGuess = bands[Math.floor(Math.random * bands.length)];
+var updateBandChoice = function () {
+bandToChoose = bands[Math.floor(Math.random * bands.length)];
 };
+
+var bandLetter = 
+
+
+
+// var updateBandLetter = function () {
+//     bandLetter = bandToChoose[null];
+// };
 
 var updateGuessesLeft = function () {
     document.querySelector('#guesses-left').innerHTML = guessesLeft;
@@ -29,13 +39,16 @@ var updateGuessesLeft = function () {
    var reset = function () {
     guessesLeft = 10;
     guessedLetters = [];
-    updateBandGuess();
+    updateBandChoice();
     updateGuessesLeft();
     updateGuessesSoFar();
+    updateBandLetter();
 };
 
-updateBandGuess();
+updateBandChoice();
+updateBankChoice();
 updateGuessesLeft();
+
 
 //Full Function///MAIN FUNCTION/////////////////////
 // This function will capture the keyboard clicks.
@@ -54,3 +67,7 @@ document.onkeydown = function (event) {
     // Then its going to run the update functions
     updateGuessesLeft();
     updateGuessesSoFar();
+
+    //////////////////////////////////////////////////////////
+
+    if (letter)
