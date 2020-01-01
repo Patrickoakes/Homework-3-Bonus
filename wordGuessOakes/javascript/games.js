@@ -20,7 +20,11 @@ var updateBandChoice = function () {
 bandToChoose = bands[Math.floor(Math.random * bands.length)];
 };
 
-var bandLetter = 
+var bandLetter = bandToChoose[i];
+for (var i = 0; i < bandLetter.length; i++) {
+    console.log(bandToChoose.charAt(i));
+};
+
 
 
 
@@ -70,4 +74,4 @@ document.onkeydown = function (event) {
 
     //////////////////////////////////////////////////////////
 
-    if (letter)
+};
