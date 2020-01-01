@@ -30,7 +30,7 @@ function startGame() {
   // Reset the guesses back to 0.
   numGuesses = 9;
 
-  // Solution is chosen randomly from wordList.
+  
   chosenWord = wordsList[Math.floor(Math.random() * wordsList.length)];
   // The word is broken into individual letters.
   lettersInChosenWord = chosenWord.split("");
